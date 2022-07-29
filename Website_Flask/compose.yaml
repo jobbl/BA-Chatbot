@@ -1,0 +1,23 @@
+services:
+
+  # web:
+  #   build: .
+  #   container_name: web
+  #   ports: 
+  #     - 5000:5000
+
+  stt:
+
+    image: alphacep/kaldi-en
+    container_name: stt
+    ports: 
+      - 2700:2700
+    mem_limit: 8g
+
+  tts:
+  
+    image: rhasspy/larynx:latest
+    container_name: tts
+    ports: 
+      - 5002:5002
+      

@@ -1,0 +1,28 @@
+<!-- this is a base html from which the other html files can extend from to prevent code redundancy -->
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+    <title>{% block title %} {% endblock %}</title>
+  </head>
+  <body style="background-color:#00bff3">
+    <div class="nav">
+      {% block nav %} {% endblock %}
+  </div>
+    <div class="container" >
+        {% block content %} {% endblock %}
+    </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}" ></script>
+    <script src="{{ url_for('static', filename='js/record.js') }}" ></script>
+    <script src="{{ url_for('static', filename='js/WebAudioRecorder.min.js') }}" ></script>
+  </body>
+</html>
