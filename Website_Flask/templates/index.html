@@ -1,46 +1,40 @@
 <!-- extends from base.html -->
-<div class="audio_button">
-  {% extends 'base.html' %}
-  {% block nav %}
-    <button type="button" id="changeToAudio" class="btn btn-danger btn-lg btn3d">
-  Change to Audio 
-    </button>
-    <button type="button" id="changeToText" style="display:none" class="btn btn-danger btn-lg btn3d">
-      Change to Text
+{% extends 'base.html' %}
+{% block nav %}
+  <button type="button" id="changeToAudio" class="btn btn-danger btn-lg btn3d">
+Change to Audio 
   </button>
-</div>
-<a href="https://www.surveymonkey.de/r/9JYGXWN">Survey
-  
-</a>
+  <button type="button" id="changeToText" style="display:none" class="btn btn-danger btn-lg btn3d">
+    Change to Text
+</button>
 
 {% endblock %}
 
 {% block content %}
 
-<div class="parent">
-  <div class="Moody child">
-    <img  src="{{ url_for('static', filename='Moody Neutral.png') }}" height="500em" />
-  </div>
-  <div class="text_area child">
-    <!-- <div class="cartoon">
-     <div class="bubble b r hb">Hello...<br/>I guess...
-      </div>
-    </div> -->
-    <!-- Display the result if argument given in render_template() -->
-    <div id="result child">
-      {% if result %}
-      <div class="speech left">{{ result }}</div>
-      {% else %}
-      <div class="result"></div>
-      {% endif %}
-  </div>
+<a href="/download" />
+<img src="{{ url_for('static', filename='Moody Neutral.png') }}" height="500em"  >
+</a>
+
+<div class="container_2">
+  <!-- <div class="cartoon">
+   <div class="bubble b r hb">Hello...<br/>I guess...
+    </div>
+  </div> -->
+  <!-- Display the result if argument given in render_template() -->
+  <div id="result">
+    {% if result %}
+    <div class="speech left">{{ result }}</div>
+    {% else %}
+    <div class="result"></div>
+    {% endif %}
+    
 
 <!-- submits the form to /start to call the RASA connector function in app.py -->
 </div>
-<div class="button_lower child">
 <form id="textForm" method="post">
   <input type="text" name="question" required />
-  <input type="submit" class="mySubmitButton" value="Submit" style="margin-top: 15px;" />
+  <input type="submit" class="btn btn-success btn-lg btn3d" value="Submit" />
 </form>
   <div id="controls" >
           <button type="button" class="btn btn-success btn-lg btn3d" id="recordButton" style="display:none">
@@ -52,9 +46,7 @@
     <div  class="loader" id="loader" style="display:none">
     </div>
   </div>
+
   </div>
-</div>
-
-
 
 {% endblock %}

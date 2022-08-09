@@ -6,57 +6,13 @@ display: flex;
   font-size: x-large;
 }
 
-.parent{
-  border: 1px solid black;
-  position: absolute;
-  display: flex;
-  top: 0px;
-  bottom: 0px;
-  right: 0px;
-  left: 0px;
-}
-
-.child{
-  border: 1px solid red;
-  flex: 1;
-  margin-right: 100px;
-  padding-top: 120px;
-}
-
-.audio_button{
-  height: 12%;
-  display: flex;
-  border: 1px solid black;
-  border-radius: 28px;
-}
-
-
-.button_lower{
-  padding-top: 120px;
-  position: center;
-}
-
-body, html {
-  height: 100%;
-}
-
-
-.text_area{
+.container_2{
   display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 60px;
     font-size: x-large;
-    /*border-radius: 30px;*/
-    /*background-color: white;*/
   }
-
-  /* handles Moody image and position in body */
-.Moody {
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
-}
 
 #textForm{
     display: flex;
@@ -87,18 +43,6 @@ body, html {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
-
-/* handles background image */
-.background {
-  margin: 0;
-  height: 100%;
-  display: flex;
-  background-image: url("/static/Moody\ Background\ 1.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
 }
 
 
@@ -144,26 +88,6 @@ body, html {
     background-color:#c63702;
   }
   
-  /* Submit text green button */
-  .mySubmitButton {
-    background-color:#44c767;
-    border-radius:28px;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:Arial;
-    font-size:17px;
-    font-weight:bold;
-    padding:16px 31px;
-    text-decoration:none;
-  }
-  .mySubmitButton:hover {
-    background-color:#5cbf2a;
-  }
-  .mySubmitButton:active {
-    position:relative;
-    top:1px;
-  }
 
   .speech {
     /* (A1) FONT */
