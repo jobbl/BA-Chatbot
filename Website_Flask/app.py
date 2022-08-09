@@ -1,10 +1,9 @@
 from urllib import response
 from flask import Flask, render_template, request, send_file
 from urllib.parse import quote
-from network import synthesize, recognize, rasa_connector
+from network import synthesize, recognize, rasa_connector, stt
 import time
 import os
-import datetime
 
 wav_question = "question.wav"
 wav_response = "response.wav"
@@ -32,8 +31,8 @@ def extract():
                 f.write(request.data)
 
             # text = recognize(wav_question)
-            text = stt(wav_question,"vosk-model-small-en-us-0.15.zip")
-            
+            text = stt(wav_question,"vosk-model-small-en-us-0.15")
+            print("text:",text)
 
         else:
 

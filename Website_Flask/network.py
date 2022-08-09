@@ -34,6 +34,7 @@ def stt(wav_path,model_path):
             text += json.loads(rec.Result())["text"]
         else:
             print(rec.PartialResult())
+            text += json.loads(rec.PartialResult())["partial"]
             
 
     print(text)
