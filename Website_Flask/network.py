@@ -3,7 +3,42 @@ import wave
 import requests
 import json
 import asyncio
+from vosk import Model, KaldiRecognizer, SetLogLevel
 
+
+SetLogLevel(0)
+
+
+def stt(wav_path,model_path):
+    
+    # if not os.path.exists("model"):
+    #     print ("Please download the model from https://alphacephei.com/vosk/models and unpack as 'model' in the current folder.")
+    #     exit (1)
+
+    wf = wave.open(wav_path, "rb")
+    if wf.getnchannels() != 1 or wf.getsampwidth() != 2 or wf.getcomptype() != "NONE":
+        print ("Audio file must be WAV format mono PCM.")
+        exit (1)
+
+    model = Model(model_path)
+    rec = KaldiRecognizer(model, wf.getframerate())
+    rec.SetWords(True)
+    # rec.SetPartialWords(True)
+    text = ""
+    
+    while True:
+        data = wf.readframes(4000000)
+        if len(data) == 0:
+            break
+        if rec.AcceptWaveform(data):
+            text += json.loads(rec.Result())["text"]
+        else:
+            print(rec.PartialResult())
+            
+
+    print(text)
+    
+    return text
 
 def recognize(wav_question):
     return asyncio.run(recognize_websocket(wav_question))

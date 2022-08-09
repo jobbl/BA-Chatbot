@@ -31,7 +31,8 @@ def extract():
                 # write as wav, to bring in the right format for python
                 f.write(request.data)
 
-            text = recognize(wav_question)
+            # text = recognize(wav_question)
+            text = stt(wav_question,"vosk-model-small-en-us-0.15.zip")
             
 
         else:
