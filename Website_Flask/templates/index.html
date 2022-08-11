@@ -28,10 +28,17 @@ Change to Audio
     {% else %}
     <div class="result"></div>
     {% endif %}
-    
+
+  </div>
+    <div id="text">
+      {% if text %}
+      <div class="speech left">{{ text }}</div>
+      {% else %}
+      <div class="text"></div>
+      {% endif %}
+    </div>
 
 <!-- submits the form to /start to call the RASA connector function in app.py -->
-</div>
 <form id="textForm" method="post">
   <input type="text" name="question" required />
   <input type="submit" class="btn btn-success btn-lg btn3d" value="Submit" />

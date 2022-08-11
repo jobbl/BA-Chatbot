@@ -6,13 +6,13 @@ services:
   #   ports: 
   #     - 5000:5000
 
-  stt:
+  # stt:
 
-    image: alphacep/kaldi-en
-    container_name: stt
-    ports: 
-      - 2700:2700
-    mem_limit: 8g
+  #   image: alphacep/kaldi-en
+  #   container_name: stt
+  #   ports: 
+  #     - 2700:2700
+  #   mem_limit: 8g
 
   tts:
   

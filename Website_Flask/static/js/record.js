@@ -111,12 +111,14 @@ function startRecording() {
 				return response.html;
 			}).then((html) => {
 				console.log("here");
+				var parser = new DOMParser();
+				var doc = parser.parseFromString(html, "text/html");
+				// document.getElementById("text").innerHTML = doc.getElementById("text").innerHTML;
+
 				// download wav file from server
 				audio = new Audio("/audio_response/" + new Date().getTime());
 				audio.play();
 
-				var parser = new DOMParser();
-				var doc = parser.parseFromString(html, "text/html");
 				document.getElementById("result").innerHTML = doc.getElementById("result").innerHTML;
 				loader.style.display = "none";
                 recordButton.style.display = "block";

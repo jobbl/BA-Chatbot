@@ -72,7 +72,7 @@ def extract():
 
 @app.route('/audio_response/<variable>', methods=['POST', 'GET'])
 def download(variable):
-    print('audio.wav' + str(datetime.datetime.now()))
+
     return send_file(wav_response,as_attachment=True, download_name='audio.wav')
 
 @app.route('/download')
@@ -82,4 +82,4 @@ def downloadFile ():
 
 # executes when script is called -> starts the server, takes optional arguments like port number and debugging amount, see flask documentation
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host= '0.0.0.0',port=5000,debug=True)
