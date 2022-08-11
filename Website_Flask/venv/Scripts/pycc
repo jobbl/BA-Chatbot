@@ -1,3 +1,0 @@
-#!c:\users\user\desktop\jordan\uni\ss 22\kp rasa\kp-rasa\website_flask\venv\scripts\python.exe
-from numba.pycc import main
-main()
