@@ -92,7 +92,7 @@ def synthesize(text, wav_response):
     # url = "http://localhost:5002/api/tts?voice=en-us%2Fharvard-glow_tts&text= "+text+"&vocoder=hifi_gan%2Funiversal_large&denoiserStrength=0.002&noiseScale=0.667&lengthScale=0.85&ssml=false"
     
      # english cmu_eey voice
-    url = "http://localhost:5002/api/tts?voice=en-us/cmu_eey-glow_tts&text= "+text+"&vocoder=hifi_gan%2Fvctk_small&denoiserStrength=0.002&noiseScale=1&lengthScale=1&ssml=false"
+    url = "http://tts:5002/api/tts?voice=en-us/cmu_eey-glow_tts&text= "+text+"&vocoder=hifi_gan%2Fvctk_small&denoiserStrength=0.002&noiseScale=1&lengthScale=1&ssml=false"
     
     audio = requests.get(url).content
 
@@ -106,7 +106,7 @@ def rasa_connector(text):
     payload = json.dumps({"sender": "Rasa", "message": text})
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     response = requests.request(
-        "POST",   url="http://localhost:5005/webhooks/rest/webhook", headers=headers, data=payload).json()
+        "POST",   url="http://rasa:5005/webhooks/rest/webhook", headers=headers, data=payload).json()
 
     resp = ""
 
