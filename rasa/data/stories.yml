@@ -32,11 +32,25 @@ stories:
 - story: tell_me_about_your_day
   steps:
   - checkpoint: introduction
-  - action: utter_tell_me_about_your_day
-  - action: day_form
-  - active_loop: day_form
+  - action: utter_tell_me_about_your_past
+  - action: past_form
+  - active_loop: past_form
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-  - action: action_utter_reaction_day
- 
+  - action: action_utter_reaction_past
+  - action: utter_tell_me_about_your_now
+  - action: now_form
+  - active_loop: now_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_utter_reaction_now
+  - action: utter_tell_me_about_your_future
+  - action: future_form
+  - active_loop: future_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_utter_reaction_future
+  - action: utter_goodbye

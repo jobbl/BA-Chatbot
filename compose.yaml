@@ -9,6 +9,12 @@ services:
   #   command:
   #     - run
 
+  actions:
+    build: rasa/actions/.
+    container_name: actions
+    ports: 
+      - 5055:5055
+
   rasa:
     build: rasa/.
     container_name: rasa

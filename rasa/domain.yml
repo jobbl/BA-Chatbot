@@ -14,76 +14,52 @@ intents:
 
 entities:
   - name
-  - emotion
-  - specified_emotion
-  - reason
-  - specific_reason
-  - response
 
 forms:
-  day_form:
+  past_form:
     required_slots:
-      - journal_day
+      - journal_past
+  now_form:
+    required_slots:
+      - journal_now
+  future_form:
+    required_slots:
+      - journal_future
 
 slots:
-  name:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: name
-  emotion:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: emotion
-  specified_emotion:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: specified_emotion
-  reason:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: reason
-  specific_reason:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: specific_reason
-      slots:
-  journal_day:
+
+  journal_past:
     type: text
     influence_conversation: true
     mappings:
       - type: from_text
         conditions:
-         - active_loop: day_form
-           requested_slot: journal_day
-  response:
+         - active_loop: past_form
+           requested_slot: journal_past
+
+  journal_now:
     type: text
-    influence_conversation: false
+    influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: response
+      - type: from_text
+        conditions:
+         - active_loop: now_form
+           requested_slot: journal_now
+
+  journal_future:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+         - active_loop: future_form
+           requested_slot: journal_future
       
 actions: 
-  - action_emotion
-  - action_activity
-  - action_saving_text
+  - action_utter_reaction_past
+  - action_utter_reaction_now
+  - action_utter_reaction_future
   - action_repeat
-  - action_quiz_response1
-  - action_quiz_response2
-  - action_quiz_response3
-  - action_quiz_response4
-  - action_quiz_response5
-  - action_quiz_response6
-  - action_utter_reaction_day
 
 responses:
 
@@ -95,8 +71,14 @@ responses:
   4) Say \"bye\" to end the session. \n
   5) Say \"help\" to see these tips again. \n" 
 
-  utter_tell_me_about_your_day:
-  - text: "First, I would like you to tell me about your day. What have you done or not done today? How did you feel?"
+  utter_tell_me_about_your_past:
+  - text: "First, I would like you to tell me about the last days. What have you been doing or not doing? What happened in your life? How were you feeling?"
+
+  utter_tell_me_about_your_now:
+  - text: "Now, tell me how you feel right now. What are you thinking about. Is there anything on your heart?"
+
+  utter_tell_me_about_your_future:
+  - text: "Lastly, share your vision of your future with me. What is coming for you? How do you feel about what is coming?"
 
   utter_greet:
   - text: "Hey, it's good to meet you!"
@@ -120,7 +102,7 @@ responses:
 
 # MOOD JOURNAL SPECIFIC UTTERS 
   utter_goodbye:
-  - text: "Bye"
+  - text: "Thanks for talking with me! Please follow this link to the survey: https://orn9omre.paperform.co"
 
   utter_please_rephrase:
   - text: "I'm sorry, I didn't quite understand that. Could you say it again, please?"

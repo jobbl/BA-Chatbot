@@ -12,6 +12,6 @@ RUN pip install rasa
 
 COPY . /app
 
-RUN rasa train
+RUN rasa train --force
 
 CMD [ "sh","-c","rasa run --enable-api" ]
