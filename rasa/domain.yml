@@ -72,7 +72,7 @@ responses:
   5) Say \"help\" to see these tips again. \n" 
 
   utter_tell_me_about_your_past:
-  - text: "First, I would like you to tell me about the last days. What have you been doing or not doing? What happened in your life? How were you feeling?"
+  - text: "Great! First, I would like you to tell me about the last days. What have you been doing or not doing? What happened in your life? How were you feeling?"
 
   utter_tell_me_about_your_now:
   - text: "Now, tell me how you feel right now. What are you thinking about. Is there anything on your heart?"
@@ -90,11 +90,11 @@ responses:
   - text: "That's a beautiful name, I like it!"
 
   utter_iamabot:
-  - text: "My name is Moody, I'm a therapeutical chatbot. I like talking to you but keep in mind that 
-  I do not replace the help and advice of a real human therapist!"
+  - text: "I am Emotion Bot, a prototype for enabling more empathic online therapy. Keep in mind that 
+  I do not replace the help and advice of a real human therapist! Are you ready to start?"
 
   utter_understand:
-  - text: "Do you understand that, {name}?"
+  - text: "Did you understand that?"
 
   utter_submit:
   - text: Thanks!

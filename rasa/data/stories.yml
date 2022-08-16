@@ -8,26 +8,21 @@ stories:
   - action: utter_ask_name
   - intent: name_answer
   - action: utter_name_reaction
-  - checkpoint: greeting
+  - checkpoint: iamabot
 
-# introduce and user says not understand Moody = bot
-- story: introduction
+- story: affirm_iamabot
   steps:
-  - checkpoint: greeting
+  - checkpoint: iamabot
   - action: utter_iamabot
-  - action: utter_understand
-  - intent: negate
-  - checkpoint: greeting
-
-# introduce and user says they understand Moody = bot
-- story: introduction
-  steps:
-  - checkpoint: greeting
-  - action: utter_iamabot
-  - action: utter_understand
   - intent: affirm
-  - action: utter_tutorial
   - checkpoint: introduction
+
+- story: negate_iamabot
+  steps:
+  - checkpoint: iamabot
+  - action: utter_iamabot
+  - intent: negate
+  - checkpoint: iamabot
 
 - story: tell_me_about_your_day
   steps:

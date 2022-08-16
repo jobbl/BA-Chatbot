@@ -68,6 +68,23 @@ def extract():
                 
                 return payload
 
+        else:
+            
+            response = "I did not understand that. Could you please repeat?"
+            if request.data:
+        
+            # encode teyt for synthesizing speech
+                response=response.replace("#"," ")
+                
+                # audio will be downloaded at /audio_response, see record.js
+                synthesize(response, wav_response)
+
+                
+                payload = {"html": render_template(
+                    'index.html', result=response, text=text)}
+                
+                return payload
+
         # render template with resp and the original user text (could be used for chat visualization)
             return render_template('index.html', result=response, text=text)
         
