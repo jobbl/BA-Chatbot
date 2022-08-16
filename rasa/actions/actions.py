@@ -6,44 +6,14 @@ from rasa_sdk.executor import CollectingDispatcher
 from actions.pdf import pdf
 
 
-class ActionEmotion(Action):
+class ReactionDay(Action):
     def name(self) -> Text:
-        return 'action_emotion'
+        return 'action_utter_reaction_day'
 
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
 
-        emotion = next(tracker.get_latest_entity_values("emotion"), None)
-        print(emotion)
-        name = tracker.get_slot('name')
-
-        if(emotion == "happy"):
-            msg = "Being happy is one of the most beautiful feelings we can enjoy. And it's contagious! Knowing that you're happy makes me happy and I am hard to impress, see? Show me, why are you happy right now? Maybe I can learn something from that. Please pick one of these more specific emotions which fits your current mood best: content, cheerful, proud, optimistic, joyful, relaxed."
-        
-        elif(emotion == "sad"):
-            msg = "You know, everybody feels sad sometimes. Even me. Don't worry about feeling like you have to pretend to be happy all the time. Just go look inside your heart right now and let's find out why you're sad. Please pick one of these more specific emotions which fits your current mood best: hurt, heartbroken, shameful, disappointed, exhausted, melancholic, hopeless."
-
-        # elif(emotion == "afraid"):
-        #     msg = "Feeling scared is a very anxiety and nervousness causing emotion. No wonder no one likes feeling scared. It is worrying that you are, "+name+". Show me, why are you scared?"
-
-        elif(emotion == "lonely"):
-            msg = "Feeling lonely can be quite the isolating experience. You may feel unheard but also unable to speak, because you feel that no one would understand or even listen. "+name+", you're not alone. Not even when you think everyone has left you. So me, Moody, will help you with this for example! Come on, pick one of the options below and help you! Please pick one of these more specific emotions which fits your current mood best: fragile, melancholic, excluded, unwanted, missing, heartbroken, isolated"
-        
-        elif(emotion == "connected"):
-            msg = "Connected? Like many flower buds to a big tree? Or like all the bubbles in a sea wave? In a way even we two are connected. I like it, tell me more about how you're feeling connected right now! Pick one below, let's see where it goes. Please pick one of these more specific emotions which fits your current mood best: intimate, loved, cooperative, attracted, interconnected."
-        
-        elif(emotion == "excited"):
-            msg = "EXCITED? DID YOU JUST FINISH A BIG RACE? OR DID YOU ACCOMPLISH A WISH OR WIN SOMETHING AWESOME? WHY AM I SCREAMING? ISN'T IT OBVIOUS? I'M SUPER EXCITED FOR YOU, TOO! WOHOO, SO EXCITED I WANT TO KNOW EVEN MORE ABOUT IT! PICK AN OPION, WHOOP WHOOP!! Aroused, energetic, optimistic, moved, amazed, surprised."
-
-        elif(emotion == "surprised"):
-            msg = "You won 1 million money! Did I surprise you? It was just a joke. Feeling surprised could mean good or bad, so it's hard to clearly give you an opinion on it right now. You surprised me a little. Now make up for it by showing me the best option for why you're surprised! Pick one of these more specific emotions which fits your current mood best: confused, stunned, alarmed, overcome, moved, shocked, amazed."
-        
-        elif(emotion == "serene"):
-            msg = "Ooohh, serene, yes? How relaxing, I love relaxing and just taking it slowly sometimes. Seems like we're riding the same wave right now, aren't we? Let's chill, I'll maybe even send you some digital sunglasses, hehe. Feeling serene can be caused by most different circumstances. Share your philosophy with me, "+name+". Please pick one of these more specific emotions which fits your current mood best: sleepy, peaceful, calm, relaxed, content."
-        
-        elif(emotion == "angry"):
-            msg = "Oh, angry? Well, sometimes anger can help quickly release stress. But sadly, most of the time it just makes us feel more stressed. What kind of anger are you feeling? Please pick one of these more specific emotions which fits your current mood best: enraged, offended, irritable, aggressive, frustrated."
-        
+        msg = tracker.get_slot('journal_text')
         dispatcher.utter_message(text=msg)
 
         return []

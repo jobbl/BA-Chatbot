@@ -1,5 +1,5 @@
-# FROM python:3.8.10
-FROM rasa
+FROM python:3.8.10
+# FROM rasa
 
 # RUN apt-get update -y && \
 #     apt-get install -y python-pip python-dev
@@ -8,7 +8,7 @@ FROM rasa
 
 WORKDIR /app
 
-# RUN pip install rasa
+RUN pip install rasa
 
 COPY . /app
 

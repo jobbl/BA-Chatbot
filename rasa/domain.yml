@@ -37,9 +37,9 @@ entities:
   - response
 
 forms:
-  journal_form:
+  day_form:
     required_slots:
-      - journal_text
+      - journal_day
 
 slots:
   name:
@@ -79,8 +79,8 @@ slots:
     mappings:
       - type: from_text
         conditions:
-         - active_loop: journal_form
-           requested_slot: journal_text
+         - active_loop: day_form
+           requested_slot: journal_day
   response:
     type: text
     influence_conversation: false
@@ -109,6 +109,9 @@ responses:
   3) Say \"activity selection\" and i will bring you back to the activity selection. \n
   4) Say \"bye\" to end the session. \n
   5) Say \"help\" to see these tips again. \n" 
+
+  utter_tell_me_about_your_day:
+  - text: "First, I would like you to tell me about your day. What have you done or not done today? How did you feel?"
 
   utter_greet:
   - text: "Hey, it's good to meet you!"

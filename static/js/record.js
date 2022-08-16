@@ -1,6 +1,15 @@
 //webkitURL is deprecated but nevertheless
 URL = window.URL || window.webkitURL;
 
+var constraints = { audio: true, video:false };
+
+/*
+	We're using the standard promise based getUserMedia() 
+	https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+*/
+
+navigator.mediaDevices.getUserMedia(constraints);
+
 var gumStream; 						//stream from getUserMedia()
 var recorder; 						//WebAudioRecorder object
 var input; 							//MediaStreamAudioSourceNode  we'll be recording
