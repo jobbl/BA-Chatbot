@@ -1,10 +1,10 @@
 <!-- extends from base.html -->
 {% extends 'base.html' %}
 {% block nav %}
-  <button type="button" id="changeToAudio" class="btn btn-danger btn-lg btn3d">
+  <button type="button" id="changeToAudio" class="btn btn-danger btn-lg btn3d" style="display:none">
 Change to Audio 
   </button>
-  <button type="button" id="changeToText" style="display:none" class="btn btn-danger btn-lg btn3d">
+  <button type="button" id="changeToText"  class="btn btn-danger btn-lg btn3d">
     Change to Text
 </button>
 
@@ -13,7 +13,7 @@ Change to Audio
 {% block content %}
 
 <a href="/download" />
-<img src="{{ url_for('static', filename='Moody Neutral.png') }}" height="500em"  >
+<img src="{{ url_for('static', filename='cat_Therapist_transparent.png') }}" height="500em"  >
 </a>
 
 <div class="container_2">
@@ -39,12 +39,12 @@ Change to Audio
     </div> -->
 
 <!-- submits the form to /start to call the RASA connector function in app.py -->
-<form id="textForm" method="post">
+<form id="textForm" method="post" style="display:none">
   <input type="text" name="question" required />
-  <input type="submit" class="btn btn-success btn-lg btn3d" value="Submit" />
+  <input type="submit" class="btn btn-success btn-lg btn3d" value="Submit"  />
 </form>
   <div id="controls" >
-          <button type="button" class="btn btn-success btn-lg btn3d" id="recordButton" style="display:none">
+          <button type="button" class="btn btn-success btn-lg btn3d" id="recordButton" >
             Record
     </button>
           <button type="button" class="btn btn-danger btn-lg btn3d" id="stopButton" style="display:none">

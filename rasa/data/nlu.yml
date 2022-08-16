@@ -1,12 +1,31 @@
 version: "3.1"
 
 nlu:
+
+- lookup: name
+  examples: |
+    - Anna
+    - Antonia
+    - Ben 
+    - Maren
+    - Xiao
+    - Jordan
+    - Jessica
+    - Ricardo
+    - Lukas
+    - Lara
+    - Hannah
+    - Julia
+    - Kai
+    - Marie
+    - Ulf
+    
 - intent: greet
   examples: |
     - hey
     - hello
-    - hi
-    - hello there
+    - hi  
+    - hello there 
     - good morning
     - good evening
     - moin
@@ -17,6 +36,145 @@ nlu:
     - goodevening
     - good afternoon
 
+- intent: name_answer
+  examples: |
+    - My name is [Jessi](name)
+    - my name is [Jessi](name)
+    - Hey, I'm [Jordan](name)
+    - hey, I'm [Jordan](name)
+    - hey I'm [Jordan](name)
+    - hey I'm Jordan
+    - I'm [](name)
+    - i'm [](name)
+    - I am [](name)
+    - i am [](name)
+    - [](name)
+    - It's [](name)
+    - it's [](name)
+    - It is [](name)
+    - it is [](name)
+
+- intent: negate
+  examples: |
+    - No, I don't understand
+    - no i don't understand
+    - No I don't understand
+    - No I don't
+    - no, I don't
+    - no
+    - nope
+    - nein
+    - negative
+    - I don't
+    - i don't 
+    - No
+    - Nope
+    - No idea
+    - no idea
+    - don't know
+    - Don't know
+    - I don't get it
+    - I don't understand
+    - i don't understand
+    - i dont understand
+    - i dont
+    - I don't want to
+    - i don't wanna
+    - i don't want to
+    - i dont want
+    - i dont want to
+    - i dont feel like it
+    - i don't feel like it
+    - I don't feel like it
+
+- intent: affirm
+  examples: |
+    - Yes I understand
+    - Yes, I do
+    - Ja
+    - yes
+    - Yes
+    - Yeh
+    - yep
+    - i do
+    - I do
+    - sure
+    - of course
+    - definitely
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - sure
+    - Sure
+    - Yes i want to
+    - yeah sure
+    - why not
+    - yeah
+    - of course
+    - yes please
+    - affirmative
+    - sure thing
+    - ok
+    - Ok
+
+- intent: end_meditation
+  examples: |
+    - I'm done
+    - im done
+    - i'm done
+    - im finished
+    - I'm finished
+    - done
+    - finished
+    - I finished
+    - end
+    - Done
+    - i finished 
+    - skip
+
+- intent: select_skip
+  examples: |
+    - skip
+    - I want to skip
+    - select skip
+    - i wanna skip
+    - i wish to skip
+    - skip please
+    - skip it
+
+- intent: select_therapy
+  examples: |
+    - therapy
+    - questions
+    - therapy session
+    - session
+    - Therapy
+    - Session
+    - Therapy Session
+
+- intent: select_mood_journal
+  examples: |
+    - mood journal
+    - mood
+    - mood journaling
+    - journal
+    - journaling
+    - mood tracking
+    - Mood Journal
+    - Mood Journaling
+    
+- intent: select_quiz
+  examples: |
+    - quiz
+    - Quiz
+    - the quiz
+    - The quiz
+    - The Quiz
+    - quiz please
+    - I want the quiz
+    
 - intent: goodbye
   examples: |
     - cu
@@ -29,59 +187,7 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
-- intent: affirm
-  examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
-
-- intent: deny
-  examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
-
-- intent: mood_great
-  examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
-
-- intent: mood_unhappy
-  examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
+    - end
 
 - intent: bot_challenge
   examples: |
@@ -89,3 +195,135 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
+- intent: emotions_of_user
+  examples: |
+    - [happy](emotion)
+    - [sad](emotion)
+    - [afraid](emotion)
+    - [surprised](emotion)
+    - [excited](emotion)
+    - [serene](emotion)
+    - [angry](emotion)
+    - [lonely](emotion)
+    - [connected](emotion)
+
+- intent: quiz_response
+  examples: |
+    - [True](response)
+    - [true](response)
+    - [False](response)
+    - [false](response)
+
+- intent: specify_emotions
+  examples: |
+    - [enraged](specified_emotion)
+    - [offended](specified_emotion)
+    - [irritable](specified_emotion)
+    - [aggressive](specified_emotion)
+    - [frustrated](specified_emotion)
+    - [hurt](specified_emotion)
+    - [heartbroken](specified_emotion)
+    - [shameful](specified_emotion)
+    - [disappointed](specified_emotion)
+    - [depressed](specified_emotion)
+    - [exhausted](specified_emotion)
+    - [melancholic](specified_emotion)
+    - [hopeless](specified_emotion)
+    - [content](specified_emotion)
+    - [cheerful](specified_emotion)
+    - [proud](specified_emotion)
+    - [optimistic](specified_emotion)
+    - [joyful](specified_emotion)
+    - [relaxed](specified_emotion)
+    - [fragile](specified_emotion)
+    - [melancholic](specified_emotion)
+    - [excluded](specified_emotion)
+    - [unwanted](specified_emotion)
+    - [lonely](specified_emotion)
+    - [missing](specified_emotion)
+    - [heartbroken](specified_emotion)
+    - [isolated](specified_emotion)
+    - [sleepy](specified_emotion)
+    - [peaceful](specified_emotion)
+    - [calm](specified_emotion)
+    - [relaxing](specified_emotion)
+    - [hopeful](specified_emotion)
+    - [content](specified_emotion)
+    - [confused](specified_emotion)
+    - [stunned](specified_emotion)
+    - [alarmed](specified_emotion)
+    - [overcome](specified_emotion)
+    - [moved](specified_emotion)
+    - [shocked](specified_emotion)
+    - [amazed](specified_emotion)
+    - [aroused](specified_emotion)
+    - [energetic](specified_emotion)
+    - [optimistic](specified_emotion)
+    - [moved](specified_emotion)
+    - [amazed](specified_emotion)
+    - [surprised](specified_emotion)
+    - [intimate](specified_emotion)
+    - [loved](specified_emotion)
+    - [cooperative](specified_emotion)
+    - [attracted](specified_emotion)
+    - [interconnected](specified_emotion)
+    - [commited](specified_emotion)
+    - [stressed](specified_emotion)
+    - [worried](specified_emotion)
+    - [scared](specified_emotion)
+    - [terrified](specified_emotion)
+    - [insecure](specified_emotion)
+    - [nervous](specified_emotion)
+    - [guilty](specified_emotion)
+    - [helpless](specified_emotion)
+
+- intent: reason_for_mood
+  examples: |
+    - [](reason)
+    - [relationship](reason)
+
+- intent: specific_reason_for_mood
+  examples: |
+    - [](specific_reason)
+    - [relationship](specific_reason)
+
+- intent: writing_text
+  examples: |
+    - [](diary_text)
+    - [njekwinde](diary_text)
+
+- intent: activity_for_emotion
+  examples: |
+    - [health](reason)
+    - [relationships](reason)
+    - [recreation and fun](reason)
+    - [physical growth](reason)
+    - [mental growth](reason)
+    - [love](reason)
+    - [learning](reason)
+    - [career and work](reason)
+
+- intent: repeat
+  examples: |
+    - repeat
+    - could you repeat that?
+    - repeat that please
+    - say that again
+    - what was that?
+    - sorry?
+    - could you say that again please?
+
+- intent: help
+  examples: |
+    - help
+    - help please
+    - i need help
+
+- intent: activity_selection
+  examples: |
+    - activity selection
+    - i want to go to the activity selection
+    - to the activity selection please
+    - i want to select an activity
+    - i want another activity

@@ -1,18 +1,298 @@
 version: "3.1"
 
 intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
+  - greet #
+  - goodbye #
+  - affirm #
+  - deny #
+  - mood_great #
+  - mood_unhappy #
+  - bot_challenge #
+  - name_answer #
+  - negate #
+  - understand_answer #
+  - select_mood_journal #
+  - select_therapy #
+  - reason_for_mood #
+  - specific_reason_for_mood #
+  - writing_text  #
+  - emotions_of_user
+  - specific_emotions
+  - activity_for_emotion
+  - specify_emotions
+  - select_skip
+  - repeat
+  - select_quiz
+  - quiz_response
+  - help
+  - activity_selection
+  - end_meditation
+
+entities:
+  - name
+  - emotion
+  - specified_emotion
+  - reason
+  - specific_reason
+  - response
+
+forms:
+  journal_form:
+    required_slots:
+      - journal_text
+
+slots:
+  name:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: name
+  emotion:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: emotion
+  specified_emotion:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: specified_emotion
+  reason:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: reason
+  specific_reason:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: specific_reason
+      slots:
+  journal_text:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+         - active_loop: journal_form
+           requested_slot: journal_text
+  response:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: response
+      
+actions: 
+  - action_emotion
+  - action_activity
+  - action_saving_text
+  - action_repeat
+  - action_quiz_response1
+  - action_quiz_response2
+  - action_quiz_response3
+  - action_quiz_response4
+  - action_quiz_response5
+  - action_quiz_response6
 
 responses:
-  utter_greet:
-  - text: "Hey! How are you?"
 
+  utter_tutorial:
+  - text: "Here are some tips for our conversation: \n
+  1) Say \"hello\" to start from the beginning again. \n
+  2) Say \"repeat\" and i will repeat my last sentences. \n
+  3) Say \"activity selection\" and i will bring you back to the activity selection. \n
+  4) Say \"bye\" to end the session. \n
+  5) Say \"help\" to see these tips again. \n" 
+
+  utter_greet:
+  - text: "Hey, it's good to meet you!"
+
+  utter_ask_name:
+  - text: "What's your name?"
+
+  utter_name_reaction:
+  - text: "That's a beautiful name, I like it!"
+
+  utter_iamabot:
+  - text: "My name is Moody, I'm a therapeutical chatbot. I like talking to you but keep in mind that 
+  I do not replace the help and advice of a real human therapist!"
+
+  utter_understand:
+  - text: "Do you understand that, {name}?"
+
+  utter_ask_suicidal:
+  - text: "Before we start I need to ask you something. It is important to me to inquire about
+  your health and well-being. This may sound hard, but please answer honestly. Do you feel suicidal? Do you
+  sometimes wish to not be alive?"
+
+  utter_is_suicidal:
+  - text: "I know it's hard but please reach out for help. Here, I will send you a link for the suicidal hotline. 
+  It is a start, don't give up! Moody believes in you!! https://blog.opencounseling.com/suicide-hotlines/"
+
+  utter_celebrate:
+  - text: "I'm so happy that you're well, {name}!" 
+
+# presents user with module Mood Jounral or Therabot (survey or quiz). User can type skip to move on
+  utter_present_activities:
+  - text: "Look, I prepared two activities for you. You can either record and analyse your emotions with 
+  the Mood Journal, do a little quiz about psychology or make a little quiz to test and expand you psychological knowledge! If you don't feel like doing either or you're 
+  done with your sessions for today just say skip to move on. Pick one!"
+
+# ends the activity selection and user moves on to next action
+  utter_activity_select_end:
+  - text: "I hope you had a good time with my activity selection, {name}! Let's move on now and see what else
+  we can do!"
+
+#MEDITATION SPECIFIC UTTERS
+# asks user if they want to do meditation session, if type no then it's skipped
+  utter_meditation_ask:
+  - text: "Ah, yes! There is one more thing we can do. Do you feel like meditating together? I could share a relaxing
+  meditation video with you and we could wind down together, what do you think? If you don't feel like it, 
+  don't worry, you can say no and we'll move on."
+
+# user agrees to meditation module and Moody sends link to meditatio video
+  utter_meditation_approved:
+  - text: "Welcome to an awesome meditation wind-down session together! I made myself cosy and already stretched
+  a bit. What about you? Maybe roll your shoulders, it feels refreshing. Once you're all set, click on the link
+  at the bottom of my message, it will start the video! Once you're done meditating just text me
+  that you're done and I'll get up again! Here it is: insert link."
+
+  utter_meditation_ends:
+  - text: "Oh yeah, that was super refreshing. I hope you had a good meditation with me,
+  I sure enjoyed our activity. Alright now, let me get to my feet real quick to say
+  goodbye properly!"
+  #END MEDITATION UTTERS
+
+
+# Moody says goodbye to user and the session ends
+  utter_farewell:
+  - text: "You have reached the end of our session, {name}! I hope you had a good time, I for one was really happy
+  to hang out and talk about your feelings and thoughts. I think I learned a little about you and I hope it 
+  helped you out and that you enjoyed your stay with me! I'm gonna head home now, {name}. If you want to talk 
+  again, just start a new session, I'll be happy to welcome you back! Until then, thank you and have a great day!"
+  
+# QUIZ SPECIFIC UTTERS START
+  utter_start_quiz: 
+  - text: "Welcome to the Moody Mega Quiz! (I totally did not steal this) In this quiz I will ask you a few questions to investigate your mental health a little. Please answer them with true or false, whichever fits best. Let's start. Question 1: You can always recognize someone is depressed when they're sad all the time."
+
+  utter_quiz_question2:
+  - text: "Question no.2! It also deals with depression. Worldwide, depression is the leading cause
+  for people being unable to take part in their work life, or are generally limited in their daily
+  lives. Is that true or false, {name}?"
+
+  utter_quiz_question3:
+  - text: "Question no.3! When treating depression, medication against it is always used. What do you
+  think? Would you say true, or false?"
+
+  utter_quiz_question4:
+  - text: "Question no.4! If I'm experiencing mental health problems or am depressed,
+  then only a therapist is able to help me defeat it. Is it true, or is it false?"
+
+  utter_quiz_question5:
+  - text: "Question numero 5! If I need to, I do not require a doctor's approval to seek the help
+  of a therapist, or enter therapy. What say you? Is that correct? As always, true or false."
+
+  utter_quiz_question6:
+  - text: "Alrighty, question no.6, the last question! Normally, when one is in therapy
+  they always lay down on a couch and talk to the therapist about themselves and their troubles. 
+  Right or wrong? Your last true or false, please."
+
+  utter_quiz_done:
+  - text: "You made it! You completed the Mega Moody Quiz! Moody Mega, M and M, whatever,
+  you did it! I hope you learned something new, or that your already deep knowledge
+  was only proven further to be the absolute truth! I sure learned a lot! I will bring
+  you back to the activity selection now, see you there, {name}!"
+
+
+# MOOD JOURNAL SPECIFIC UTTERS START
+  utter_start_journal:
+  - text: "Welcome to the activity of the Mood Journal! Which of the following feelings describes your 
+  current mood best? Is it angry, afraid, sad, lonely, connected, happy, excited, surprised or serene?"
+  
+  utter_ask_journal_text:
+  - text: 'Lastly, you can add now a few lines for your journal entry:'
+
+  utter_submit:
+  - text: Thanks!
+
+  utter_angry:
+  - text: "Oh, angry? Well, sometimes anger can help to quickly release stress. But sadly, most of the time it just 
+  makes us feel more stressed. What kind of anger are you feeling? Pick an option below:"
+
+  utter_afraid:
+  - text: "Feeling scared is a very anxiety and nervousness inducing emotion. No wonder no one likes feeling scared.
+  It is worrying that you are, {name}. Show me, why are you scared?"
+
+  utter_sad:
+  - text: "You know, everybody feels sad sometimes. Even me. Don't worry about feeling like you have to 
+  pretend to be happy all the time. Just go look inside your heart right now and let's find out
+  why you're sad. It's OK, pick the option that best suits you below."
+
+  utter_lonely:
+  - text: "Feeling lonely can be quite the isolating experience. You may feel unheard but also unable
+  to speak, because you feel that no one would understand or even listen. {name}, you're not alone.
+  Not even when you think everyone has left you. So I, Moody, will help you with this for example! 
+  Come on, pick one of the options below that fits with your type of loneliness!"
+
+  utter_connected:
+  - text: "Connected? Like many flower buds to a big tree? Or like all the bubbles in a sea wave? In a way even we two 
+  are connected. I like it, tell me more about how you're feeling connected right now! Pick one below, let's
+  see where it goes."
+
+  utter_happy:
+  - text: "Being happy is one of the most beautiful feelings we can enjoy. And it's contagious! Knowing that 
+  you're happy makes me happy and I am hard to impress, see? Show me, why are you happy right now? Maybe I
+  can learn something from that."
+
+  utter_excited:
+  - text: "EXCITED? DID YOU JUST FINISH A BIG RACE? OR DID YOU ACCOMPLISH A WISH OR WIN SOMETHING AWESOME?
+  WHY AM I SCREAMING? ISN'T IT OBVIOUS? I'M SUPER EXCITED FOR YOU, TOO! WOHOO, SO EXCITED I WANT TO KNOW EVEN
+  MORE ABOUT IT! PICK AN OPION, WHOOP WHOOP!!"
+
+  utter_surprised:
+  - text: "You won 1 million money! Did I surprise you? It was just a joke. Feeling surprised could mean good
+  or bad, so it's hard to clearly give you an opinion on it right now. You surprised me a little, that's all. Now make up
+  for it by showing me the best option for why you're surprised below!"
+
+  utter_serene:
+  - text: "Ooohh, serene, yes? How relaxing, I love relaxing and just taking it slow sometimes. Seems like we're
+  riding the same wave right now, aren't we? Let's chill, I'll maybe even send you some digital sunglasses, hehe.
+  Feeling serene can be caused by most different circumstances. Share your philosophy with me, {name}. Which
+  option below describes it best?"
+
+  utter_reasons:
+  - text: ""
+
+  utter_specific_emotion:
+  - text: "Thank you for specifiying your emotions for me, it helps me help you with all my power. But I 
+  already feel I understand your situation better which gives me an idea! For every emotion inside oneself there
+  is a reason that caused it, so what is yours? I'll give you a small list, pick the option that best suits you, OK?
+  Here it is: relationships, health, recreation and fun, physical growth, mental growth, love, learning, career and work."
+
+# gives user option to write journal entry text with yes or skip with no
+  utter_session_idea:
+  - text: "Alrighty, thank you for sharing all of this with me, {name}. I think this is turning into a really good session and
+  I'm understanding your situation more and more. I have an idea, would you like to now write an entry for 
+  the Mood Journal to capture any remaining thoughts and feelings of the current situation for later? Type yes and I'll
+  listen and record your entry. Type no if you don't feel like it and we'll move on, OK?"
+
+# this action triggers when user completes Mood Journal session, provides PDF for download
+  utter_session_pdf:
+  - text: "We did it, {name}! You just completed your Mood Journal session! Congratulations, I think we did some 
+  really good work there! I listened to what you had to say and recorded it all in a PDF that contains this
+  session's activity. You can now download it by clicking on me and look into it later for further analysis. You have successfully
+  completed the Mood Journal activity! I will now bring you back to the activity selection!"
+
+# MOOD JOURNAL SPECIFIC UTTERS END
+
+
+  
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
     image: "https://i.imgur.com/nGF1K8f.jpg"
@@ -20,15 +300,13 @@ responses:
   utter_did_that_help:
   - text: "Did that help you?"
 
-  utter_happy:
-  - text: "Great, carry on!"
-
   utter_goodbye:
   - text: "Bye"
 
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
+  utter_please_rephrase:
+  - text: "I'm sorry, I didn't quite understand that. Could you say it again, please?"
+    
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
