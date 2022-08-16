@@ -1,3 +1,5 @@
 /Website_Flask/venv/
 venv
-rasa
+rasa/venv
+rasa/models
+rasa/.rasa

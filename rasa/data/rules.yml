@@ -7,12 +7,6 @@ rules:
   - intent: goodbye
   - action: utter_goodbye
 
-- rule: Suicidal_confirm
-  steps:
-    - action: utter_ask_suicidal
-    - intent: affirm
-    - action: utter_is_suicidal
-
 - rule: Ask the user to rephrase whenever they send a message with low NLU confidence
   steps:
   - intent: nlu_fallback
@@ -28,7 +22,3 @@ rules:
   - intent: help
   - action: utter_tutorial
 
-- rule: Back to the Activity Selection
-  steps:
-  - intent: activity_selection
-  - action: utter_present_activities
