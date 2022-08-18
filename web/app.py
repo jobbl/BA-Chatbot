@@ -38,74 +38,48 @@ def extract():
     if request.method == "POST":
     
         response = ""
-
         # if client recorded audio, there will be data
         if request.data:
-        
-            print("Received audio data with the size of " + str(request.content_length/1000) + "kb")
-
             with open(wav_question, mode="bw") as f:
-
                 # write as wav, to bring in the right format for python
                 f.write(request.data)
 
-            # text = recognize(wav_question)
+            # recognize speech with vosk
             text = stt(wav_question,"vosk-model-small-en-us-0.15")
-            print("text:",text)
 
         else:
-
             #  extract form data if there was any in the request
             text = str(request.form.get("question"))
-            print(text)
 
         if text not in (None, '',"None"):
-            
-            print("The patient said: " + text)
-
             if model == "rule":
                 response = "rule: " + rasa_connector_rule(text)
             else:
                 response = "ml: " + rasa_connector_ml(text)
 
-            print("Rasa answers: " +  response)
-
             if request.data:
-            
-                # encode teyt for synthesizing speech
+                # encode text for synthesizing speech
                 response=response.replace("#"," ")
-                
-                # audio will be downloaded at /audio_response, see record.js
+                # synthesize speech with rhasspy, audio will be downloaded at /audio_response, see record.js
                 synthesize(response, wav_response)
-
-                
                 payload = {"html": render_template(
                     'index.html', result=response, text=text, link = link)}
-                
                 return payload
+            
+            else:             
+                return render_template('index.html', result=response, text=text, link = link)
 
         else:
-            
             response = "I did not understand that. Could you please repeat?"
             if request.data:
-        
-            # encode teyt for synthesizing speech
+                # encode text for synthesizing speech
                 response=response.replace("#"," ")
-                
-                # audio will be downloaded at /audio_response, see record.js
+                # synthesize speech with rhasspy,audio will be downloaded at /audio_response, see record.js
                 synthesize(response, wav_response)
-
-                
                 payload = {"html": render_template(
                     'index.html', result=response, text=text, link = link)}
-                
                 return payload
 
-        # render template with resp and the original user text (could be used for chat visualization)
-            return render_template('index.html', result=response, text=text, link = link)
-        
-        return render_template('index.html', result=response, text=text, link = link)
-    
     else:
         return render_template('index.html', link = link)
 
