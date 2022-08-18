@@ -1,0 +1,51 @@
+version: "3.1"
+stories:
+# Moody greets user and asks name, reacts
+- story: greeting
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_name
+  - intent: name_answer
+  - action: utter_name_reaction
+  - checkpoint: iamabot
+
+- story: affirm_iamabot
+  steps:
+  - checkpoint: iamabot
+  - action: utter_iamabot
+  - intent: affirm
+  - checkpoint: introduction
+
+- story: negate_iamabot
+  steps:
+  - checkpoint: iamabot
+  - action: utter_iamabot
+  - intent: negate
+  - checkpoint: iamabot
+
+- story: tell_me_about_your_day
+  steps:
+  - checkpoint: introduction
+  - action: utter_tell_me_about_your_past
+  - action: past_form
+  - active_loop: past_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_utter_reaction_past
+  - action: utter_tell_me_about_your_now
+  - action: now_form
+  - active_loop: now_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_utter_reaction_now
+  - action: utter_tell_me_about_your_future
+  - action: future_form
+  - active_loop: future_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_utter_reaction_future
+  - action: utter_goodbye

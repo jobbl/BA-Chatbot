@@ -9,23 +9,37 @@ services:
   #   command:
   #     - run
 
-  actions:
-    build: rasa/actions/.
-    container_name: actions
+  actions_ml:
+    build: rasa_ml/actions/.
+    container_name: actions_ml
     ports: 
       - 5055:5055
 
-  rasa:
-    build: rasa/.
-    container_name: rasa
+  rasa_ml:
+    build: rasa_ml/.
+    container_name: rasa_ml
     ports: 
       - 5005:5005
 
+  actions_rule:
+    build: rasa_rule/actions/.
+    container_name: actions_rule
+    ports: 
+      - 5056:5055
+
+  rasa_rule:
+    build: rasa_rule/.
+    container_name: rasa_rule
+    ports: 
+      - 5006:5005
+
   web:
-    build: .
+    build: web/.
     container_name: web
     ports: 
       - 5000:5000
+    environment:
+      - PYTHONUNBUFFERED=1
 
   tts:
     image: rhasspy/larynx:latest

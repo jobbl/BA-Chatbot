@@ -1,0 +1,126 @@
+.container{
+display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 60px;
+  font-size: x-large;
+}
+
+.container_2{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+    font-size: x-large;
+  }
+
+#textForm{
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.nav{
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  padding-top: 2%;
+  padding-bottom: 3%;
+  padding-left: 20%;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* Fancy Buttons */
+.btn3d {
+    transition:all .08s linear;
+    position:relative;
+    outline:medium none;
+    -moz-outline-style:none;
+    border:0px;
+    margin-right:10px;
+    margin-top:15px;
+  }
+  .btn3d:focus {
+    outline:medium none;
+    -moz-outline-style:none;
+  }
+  .btn3d:active {
+    top:9px;
+  }
+  .btn-default {
+    box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #adadad, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#fff;
+  }
+  .btn-primary {
+    box-shadow:0 0 0 1px #428bca inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #357ebd, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#428bca;
+  }
+  .btn-success {
+    box-shadow:0 0 0 1px #5cb85c inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #4cae4c, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#5cb85c;
+  }
+  .btn-info {
+    box-shadow:0 0 0 1px #5bc0de inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #46b8da, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#5bc0de;
+  }
+  .btn-warning {
+    box-shadow:0 0 0 1px #f0ad4e inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #eea236, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#f0ad4e;
+  }
+  .btn-danger {
+    box-shadow:0 0 0 1px #c63702 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #C24032, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#c63702;
+  }
+  
+
+  .speech {
+    /* (A1) FONT */
+    font-family: arial, sans-serif;
+    font-size: 1.1em;
+   
+    /* (A2) COLORS */
+    color: rgb(255, 255, 255);
+    background: #000000;
+   
+    /* (A3) DIMENSIONS + POSITION */
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 320px;
+  }
+
+  .speech::after {
+    /* (B1-1) ATTACH TRANSPARENT BORDERS */
+    content: "";
+    border: 20px solid transparent;
+   
+    /* (B1-2) NECESSARY TO POSITION THE "TAIL" */
+    position: absolute;
+  }
+
+  .left.speech::after {
+    /* (C2-1) LEFT TRIANGLE */
+    border-right-color: #000000;
+    border-left: 0;
+   
+    /* (C2-2) POSITION AT LEFT */
+    left: -20px; top: 50%;
+    margin-top: -20px;
+  }
+  

@@ -1,0 +1,5 @@
+/Website_Flask/venv/
+venv
+rasa/venv
+rasa/models
+rasa/.rasa

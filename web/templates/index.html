@@ -1,0 +1,59 @@
+<!-- extends from base.html -->
+{% extends 'base.html' %}
+{% block nav %}
+  <button type="button" id="changeToAudio" class="btn btn-danger btn-lg btn3d" style="display:none">
+Change to Audio 
+  </button>
+  <button type="button" id="changeToText"  class="btn btn-danger btn-lg btn3d">
+    Change to Text
+</button>
+
+{% endblock %}
+
+{% block content %}
+
+<a href="/download" />
+<img src="{{ url_for('static', filename='cat_Therapist_transparent.png') }}" height="500em"  >
+</a>
+
+<div class="container_2">
+  <!-- <div class="cartoon">
+   <div class="bubble b r hb">Hello...<br/>I guess...
+    </div>
+  </div> -->
+  <!-- Display the result if argument given in render_template() -->
+  <div id="result">
+    {% if result %}
+    <div class="speech left">{{ result }}</div>
+    {% else %}
+    <div class="result"></div>
+    {% endif %}
+
+  </div>
+    <!-- <div id="text">
+      {% if text %}
+      <div class="speech left">{{ text }}</div>
+      {% else %}
+      <div class="text"></div>
+      {% endif %}
+    </div> -->
+
+<!-- submits the form to /start to call the RASA connector function in app.py -->
+<form id="textForm" method="post" style="display:none">
+  <input type="text" name="question" required />
+  <input type="submit" class="btn btn-success btn-lg btn3d" value="Submit"  />
+</form>
+  <div id="controls" >
+          <button type="button" class="btn btn-success btn-lg btn3d" id="recordButton" >
+            Record
+    </button>
+          <button type="button" class="btn btn-danger btn-lg btn3d" id="stopButton" style="display:none">
+      Stop  
+    </button>
+    <div  class="loader" id="loader" style="display:none">
+    </div>
+  </div>
+
+  </div>
+
+{% endblock %}

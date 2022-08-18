@@ -1,0 +1,153 @@
+version: "3.1"
+
+nlu:
+
+- lookup: name
+  examples: |
+    - Anna
+    - Antonia
+    - Ben 
+    - Maren
+    - Xiao
+    - Jordan
+    - Jessica
+    - Ricardo
+    - Lukas
+    - Lara
+    - Hannah
+    - Julia
+    - Kai
+    - Marie
+    - Ulf
+    
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi  
+    - hello there 
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: name_answer
+  examples: |
+    - My name is [Jessi](name)
+    - my name is [Jessi](name)
+    - Hey, I'm [Jordan](name)
+    - hey, I'm [Jordan](name)
+    - hey I'm [Jordan](name)
+    - hey I'm Jordan
+    - I'm [](name)
+    - i'm [](name)
+    - I am [](name)
+    - i am [](name)
+    - [](name)
+    - It's [](name)
+    - it's [](name)
+    - It is [](name)
+    - it is [](name)
+
+- intent: negate
+  examples: |
+    - No, I don't understand
+    - no i don't understand
+    - No I don't understand
+    - No I don't
+    - no, I don't
+    - no
+    - nope
+    - nein
+    - negative
+    - I don't
+    - i don't 
+    - No
+    - Nope
+    - No idea
+    - no idea
+    - don't know
+    - Don't know
+    - I don't get it
+    - I don't understand
+    - i don't understand
+    - i dont understand
+    - i dont
+    - I don't want to
+    - i don't wanna
+    - i don't want to
+    - i dont want
+    - i dont want to
+    - i dont feel like it
+    - i don't feel like it
+    - I don't feel like it
+
+- intent: affirm
+  examples: |
+    - Yes I understand
+    - Yes, I do
+    - Ja
+    - yes
+    - Yes
+    - Yeh
+    - yep
+    - i do
+    - I do
+    - sure
+    - of course
+    - definitely
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - sure
+    - Sure
+    - Yes i want to
+    - yeah sure
+    - why not
+    - yeah
+    - of course
+    - yes please
+    - affirmative
+    - sure thing
+    - ok
+    - Ok
+
+
+
+    
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+    - end
+
+- intent: repeat
+  examples: |
+    - repeat
+    - could you repeat that?
+    - repeat that please
+    - say that again
+    - what was that?
+    - sorry?
+    - could you say that again please?
+
+- intent: help
+  examples: |
+    - help
+    - help please
+    - i need help
