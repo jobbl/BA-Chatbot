@@ -1,0 +1,35 @@
+services:
+
+  # rasa:
+  #   image: rasa/rasa:3.2.6-full
+  #   ports:
+  #     - 5005:5005
+  #   volumes:
+  #     - ./:/app/rasa
+  #   command:
+  #     - run
+
+  actions:
+    build: rasa/actions/.
+    container_name: actions
+    ports: 
+      - 5055:5055
+
+  rasa:
+    build: rasa/.
+    container_name: rasa
+    ports: 
+      - 5005:5005
+
+  web:
+    build: .
+    container_name: web
+    ports: 
+      - 5000:5000
+
+  tts:
+    image: rhasspy/larynx:latest
+    container_name: tts
+    ports: 
+      - 5002:5002
+      

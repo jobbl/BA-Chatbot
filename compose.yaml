@@ -22,7 +22,7 @@ services:
       - 5005:5005
 
   web:
-    build: .
+    build: web/.
     container_name: web
     ports: 
       - 5000:5000
