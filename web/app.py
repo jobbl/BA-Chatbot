@@ -20,8 +20,13 @@ app = Flask(__name__)
 @app.route('/intro')
 def intro():
     global model
+    global link
     model = random.choice(['ml', 'rule'])
     print(model)
+    if model == "ml":
+        link = "ml"
+    else:
+        link = "rule"
     return render_template('intro.html')
 
 
@@ -29,6 +34,7 @@ def intro():
 @app.route('/', methods=['POST', 'GET'])
 def extract():
     
+    print("link",link)
     if request.method == "POST":
     
         response = ""

@@ -57,3 +57,12 @@ Change to Audio
   </div>
 
 {% endblock %}
+
+{% block footer %}
+
+{% if link %}
+<div class="container_2" style="font-family:'Courier New';font-weight: bold; display: inline-block;text-align:center">
+  Link to Questionnaire (when you are done) -> <a href={{ link }}>{{ link }}</a>
+</div>
+{% endif %}
+{% endblock %}
