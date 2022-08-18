@@ -1,14 +1,5 @@
 services:
 
-  # rasa:
-  #   image: rasa/rasa:3.2.6-full
-  #   ports:
-  #     - 5005:5005
-  #   volumes:
-  #     - ./:/app/rasa
-  #   command:
-  #     - run
-
   actions_ml:
     build: rasa_ml/actions/.
     container_name: actions_ml

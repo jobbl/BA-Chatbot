@@ -25,7 +25,7 @@ class ReactionPast(Action):
         if emotion == "tranquil":
             response = "Relaxing times are a blessing. Thats what our planet needs in times like these!"
         if emotion == "rooted":
-            response = "That sounds balanced. Life has a way of keeping us in the middle, does it not?"
+            response = "That sounds balanced. Life has a way of keeping us in the middle, , it seems to me."
         if emotion == "empty":
             response = "Everyone feels drawn out from time to time, because we have limited energy to spend. Do not hesitate to be kind to yourself and reach out when you feel low."
         if emotion == "threatened":
