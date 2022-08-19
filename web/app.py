@@ -5,13 +5,13 @@ from network import synthesize, recognize, rasa_connector_rule,rasa_connector_ml
 import time
 import os
 import random
+from flask_session import Session
 
 wav_question = "question.wav"
 wav_response = "response.wav"
-response = ""
-
-model = ""
-link = ""
+link_ml = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/565864?lang=en"
+link_rule = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/511888?lang=en"
+users = {}
 
 
 # initialize stt (triggers download language model for larynx/rhasspy)
@@ -23,17 +23,25 @@ while True:
 
 # create Flask instance
 app = Flask(__name__)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 @app.route('/intro')
 def intro():
-    global model
-    global link
+
+    global users
+
+    print(request.environ.get('HTTP_X_REAL_IP', request.remote_addr) )
+
     model = random.choice(['ml', 'rule'])
+    users[str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))] = model
+
     print(model)
     if model == "ml":
-        link = "ml"
+        link = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/565864?lang=en"
     else:
-        link = "rule"
+        link = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/511888?lang=en"
     return render_template('intro.html')
 
 
@@ -41,11 +49,10 @@ def intro():
 @app.route('/audio', methods=['POST', 'GET'])
 def audio():
 
-    global response
-
-    if response == "":
-        response="Start by saying \"Hello\" to me!"
-
+    if users[str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))] == "rule":
+        link = link_rule
+    else:
+        link = link_ml
 
     print("link",link)
     if request.method == "POST":
@@ -65,10 +72,11 @@ def audio():
             text = str(request.form.get("question"))
 
         if text not in (None, '',"None"):
-            if model == "rule":
-                response = "rule: " + rasa_connector_rule(text)
+
+            if users[str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))] == "rule":
+                response = rasa_connector_rule(request.environ.get('HTTP_X_REAL_IP', request.remote_addr),text)
             else:
-                response = "ml: " + rasa_connector_ml(text)
+                response = rasa_connector_ml(request.environ.get('HTTP_X_REAL_IP', request.remote_addr),text)
 
             if request.data:
                 # encode text for synthesizing speech
@@ -94,15 +102,15 @@ def audio():
                 return payload
 
     else:
-        return render_template('index.html',result=response, link = link)
+        return render_template('index.html', link = link)
 
 @app.route('/text', methods=['POST', 'GET'])
 def text():
 
-    global response
-
-    if response == "":
-        response="Start by saying \"Hello\" to me!"
+    if users[str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))] == "rule":
+        link = link_rule
+    else:
+        link = link_ml
 
     print("link",link)
     if request.method == "POST":
@@ -122,10 +130,10 @@ def text():
             text = str(request.form.get("question"))
 
         if text not in (None, '',"None"):
-            if model == "rule":
-                response = "rule: " + rasa_connector_rule(text)
+            if users[str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))] == "rule":
+                response = rasa_connector_rule(request.environ.get('HTTP_X_REAL_IP', request.remote_addr),text)
             else:
-                response = "ml: " + rasa_connector_ml(text)
+                response = rasa_connector_ml(request.environ.get('HTTP_X_REAL_IP', request.remote_addr),text)
 
             if request.data:
                 # encode text for synthesizing speech
@@ -151,7 +159,7 @@ def text():
                 return payload
 
     else:
-        return render_template('index.html', result=response, link = link, text=1)
+        return render_template('index.html', link = link, text=1)
 
 @app.route('/audio_response/<variable>', methods=['POST', 'GET'])
 def download(variable):

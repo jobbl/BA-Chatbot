@@ -31,17 +31,10 @@ Change to Audio
     {% if result %}
     <div class="speech left">{{ result }}</div>
     {% else %}
-    <div class="result"></div>
+    <div class="speech left">{{ "Start by saying 'Hello' to me!" }}</div>
     {% endif %}
 
   </div>
-    <!-- <div id="text">
-      {% if text %}
-      <div class="speech left">{{ text }}</div>
-      {% else %}
-      <div class="text"></div>
-      {% endif %}
-    </div> -->
 
 <!-- submits the form to /start to call the RASA connector function in app.py -->
 {% if text %}

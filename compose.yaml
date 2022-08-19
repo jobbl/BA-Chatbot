@@ -24,13 +24,6 @@ services:
     ports: 
       - 5006:5005
 
-  web:
-    build: web/.
-    container_name: web
-    ports: 
-      - 5000:5000
-    environment:
-      - PYTHONUNBUFFERED=1
 
   tts:
     image: rhasspy/larynx:latest
@@ -38,3 +31,10 @@ services:
     ports: 
       - 5002:5002
       
+  web:
+    build: web/.
+    container_name: web
+    ports: 
+      - 5000:5000
+    environment:
+      - PYTHONUNBUFFERED=1

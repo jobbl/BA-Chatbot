@@ -1,5 +1,5 @@
 Flask==2.2.2
 requests==2.27.1
-vosk==0.3.43
+vosk
 websockets==10.3
-
+Flask-Session

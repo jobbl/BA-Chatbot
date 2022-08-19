@@ -102,7 +102,7 @@ responses:
 
 # MOOD JOURNAL SPECIFIC UTTERS 
   utter_goodbye:
-  - text: "Thanks for talking with me! Please follow this link to the survey: https://orn9omre.paperform.co"
+  - text: "Thanks for talking with me! Please follow the link below to the survey. Thanks again and take care! Bye!"
 
   utter_please_rephrase:
   - text: "I'm sorry, I didn't quite understand that. Could you say it again, please?"

@@ -101,9 +101,9 @@ def synthesize(text, wav_response):
         f.write(audio)
 
 #   prepare header and payload as JSON, send it to the RASA connector through the webhook (RASA Server needs to be running on port 5005) and receive the response)
-def rasa_connector_ml(text):
+def rasa_connector_ml(sender, text):
 
-    payload = json.dumps({"sender": "Rasa", "message": text})
+    payload = json.dumps({"sender": str(sender), "message": text})
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     response = requests.request(
         "POST",   url="http://rasa_ml:5005/webhooks/rest/webhook", headers=headers, data=payload).json()
@@ -119,9 +119,9 @@ def rasa_connector_ml(text):
         
     return resp
 
-def rasa_connector_rule(text):
+def rasa_connector_rule(sender,text):
 
-    payload = json.dumps({"sender": "Rasa", "message": text})
+    payload = json.dumps({"sender": str(sender), "message": text})
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     response = requests.request(
         "POST",   url="http://rasa_rule:5005/webhooks/rest/webhook", headers=headers, data=payload).json()
