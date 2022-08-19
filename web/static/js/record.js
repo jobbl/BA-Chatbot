@@ -129,8 +129,11 @@ function startRecording() {
 
 				document.getElementById("result").innerHTML = doc.getElementById("result").innerHTML;
 				loader.style.display = "none";
-                recordButton.style.display = "block";
 				result.style.display = "block";
+				audio.onended = function() {
+
+					recordButton.style.display = "block";
+	};
 
 			});
 			console.log("data sent");
