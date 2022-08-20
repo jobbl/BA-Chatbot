@@ -1,29 +1,16 @@
 services:
 
-  actions_ml:
-    build: rasa_ml/actions/.
-    container_name: actions_ml
-    ports: 
-      - 5055:5055
-
-  rasa_ml:
-    build: rasa_ml/.
-    container_name: rasa_ml
-    ports: 
-      - 5005:5005
-
-  actions_rule:
-    build: rasa_rule/actions/.
-    container_name: actions_rule
+  actions:
+    build: rasa/actions/.
+    container_name: actions
     ports: 
       - 5056:5055
 
-  rasa_rule:
-    build: rasa_rule/.
-    container_name: rasa_rule
+  rasa:
+    build: rasa/.
+    container_name: rasa
     ports: 
       - 5006:5005
-
 
   tts:
     image: rhasspy/larynx:latest

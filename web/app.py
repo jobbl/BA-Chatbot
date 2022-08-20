@@ -44,13 +44,16 @@ def intro():
     resp = make_response(render_template('intro.html'))
     resp.set_cookie('model', model)
     resp.set_cookie('mode', "audio")
+    # delete last_response
+    resp.set_cookie('last_response', '', expires=0)
+
 
     id = random.randint(0,10000000)
     while id in users:
         id = random.randint(0,10000000)
     users.append(str(id))
     resp.set_cookie('id', str(id))
-    
+
     return resp 
     # return render_template('intro.html')
 
@@ -59,8 +62,11 @@ def intro():
 @app.route('/', methods=['POST', 'GET'])
 def index():
 
-    print(request.cookies.get('model'),request.cookies.get('mode'),request.cookies.get('id'))
-
+    print(request.cookies.get('model'),request.cookies.get('mode'),request.cookies.get('id'),request.cookies.get('last_response'))
+    if request.cookies.get('last_response'):
+        last_response = request.cookies.get('last_response')
+    else:
+        last_response = "Start by saying 'Hello' to me!"
 
     if request.cookies.get('id') not in users:
         return redirect(url_for('intro'))
@@ -98,17 +104,35 @@ def index():
             else:
                 response = rasa_connector_ml(request.cookies.get('id'),text)
 
+            last_response = response
+            
+
+            # response = rasa_connector_rule(request.cookies.get('id'),text)
+            # if response[1] not in (None, '',"None"):
+            #     print("here")
+            #     response = response[1]
+            # else:
+            #     print("there")
+            #     response = response[0]
+            # print(response)
+
             if request.data:
                 # encode text for synthesizing speech
                 response=response.replace("#"," ")
                 # synthesize speech with rhasspy, audio will be downloaded at /audio_response, see record.js
                 synthesize(response, wav_response)
                 payload = {"html": render_template(
-                    'index.html', result=response, link = link,text = text_input)}
-                return payload
+                    'index.html', result=response, link = link,text = text_input, last_response=last_response)}
+
+                resp = make_response(payload)
+                resp.set_cookie('last_response', last_response)
+                return resp
             
             else:             
-                return render_template('index.html', result=response, link = link, text = text_input)
+                
+                resp = make_response(render_template('index.html', result=response, link = link, text = text_input, last_response=last_response))
+                resp.set_cookie('last_response', last_response)
+                return resp
 
         else:
             response = "I did not understand that. Could you please repeat?"
@@ -119,10 +143,15 @@ def index():
                 synthesize(response, wav_response)
                 payload = {"html": render_template(
                     'index.html', result=response, link = link,text = text_input)}
-                return payload
+                resp = make_response(payload)
+                resp.set_cookie('last_response', last_response, last_response=last_response)
+                return resp
 
     else:
-        return render_template('index.html', link = link,text = text_input)
+        resp = make_response(render_template('index.html', link = link,text = text_input, last_response=last_response))
+        resp.set_cookie('last_response', last_response)
+        return resp
+
 
 @app.route('/text', methods=['POST', 'GET'])
 def text():

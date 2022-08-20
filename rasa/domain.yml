@@ -1,0 +1,113 @@
+version: "3.1"
+
+intents:
+  - greet #
+  - goodbye #
+  - affirm #
+  - deny #
+  - name_answer #
+  - negate #
+  - understand_answer #
+  - repeat
+  - help
+ 
+
+entities:
+  - name
+
+forms:
+  past_form:
+    required_slots:
+      - journal_past
+  now_form:
+    required_slots:
+      - journal_now
+  future_form:
+    required_slots:
+      - journal_future
+
+slots:
+
+  journal_past:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+         - active_loop: past_form
+           requested_slot: journal_past
+
+  journal_now:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+         - active_loop: now_form
+           requested_slot: journal_now
+
+  journal_future:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+         - active_loop: future_form
+           requested_slot: journal_future
+      
+actions: 
+  - action_utter_reaction_past
+  - action_utter_reaction_now
+  - action_utter_reaction_future
+  - action_repeat
+
+responses:
+
+  utter_tutorial:
+  - text: "Here are some tips for our conversation: \n
+  1) Say \"hello\" to start from the beginning again. \n
+  2) Say \"repeat\" and i will repeat my last sentences. \n
+  3) Say \"activity selection\" and i will bring you back to the activity selection. \n
+  4) Say \"bye\" to end the session. \n
+  5) Say \"help\" to see these tips again. \n" 
+
+  utter_tell_me_about_your_past:
+  - text: "Great! First, I would like you to tell me about the last days. What have you been doing or not doing? What happened in your life? How were you feeling?"
+
+  utter_tell_me_about_your_now:
+  - text: "Now, tell me how you feel right now. What are you thinking about. Is there anything on your heart?"
+
+  utter_tell_me_about_your_future:
+  - text: "Lastly, share your vision of your future with me. What is coming for you? How do you feel about what is coming?"
+
+  utter_greet:
+  - text: "Hey, it's good to meet you!"
+
+  utter_ask_name:
+  - text: "What's your name?"
+
+  utter_name_reaction:
+  - text: "That's a beautiful name, I like it!"
+
+  utter_iamabot:
+  - text: "I am Emotion Bot, a prototype for enabling more empathic online therapy. Keep in mind that 
+  I do not replace the help and advice of a real human therapist! Are you ready to start?"
+
+  utter_understand:
+  - text: "Did you understand that?"
+
+  utter_submit:
+  - text: Thanks!
+
+
+# MOOD JOURNAL SPECIFIC UTTERS 
+  utter_goodbye:
+  - text: "Thanks for talking with me! Please follow the link below to the survey. Thanks again and take care! Bye!"
+
+  utter_please_rephrase:
+  - text: "I'm sorry, I didn't quite understand that. Could you say it again, please?"
+    
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+

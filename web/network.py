@@ -106,16 +106,20 @@ def rasa_connector_ml(sender, text):
     payload = json.dumps({"sender": str(sender), "message": text})
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     response = requests.request(
-        "POST",   url="http://rasa_ml:5005/webhooks/rest/webhook", headers=headers, data=payload).json()
+        "POST",   url="http://rasa:5005/webhooks/rest/webhook", headers=headers, data=payload).json()
 
     resp = ""
-
+    print(response)
     #   append all responses with "text" into one string (todo: handle images, other kind of data)
     for i in range(len(response)):
         try:
             resp += response[i]['text'] + "  "
         except:
-            continue
+            pass
+        try:
+            resp += response[i]['custom']['ml'] + "  "
+        except:
+            pass
         
     return resp
 
@@ -124,16 +128,21 @@ def rasa_connector_rule(sender,text):
     payload = json.dumps({"sender": str(sender), "message": text})
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     response = requests.request(
-        "POST",   url="http://rasa_rule:5005/webhooks/rest/webhook", headers=headers, data=payload).json()
+        "POST",   url="http://rasa:5005/webhooks/rest/webhook", headers=headers, data=payload).json()
 
     resp = ""
-    rule_resp = ""
+
+    print(response)
     #   append all responses with "text" into one string (todo: handle images, other kind of data)
     for i in range(len(response)):
         try:
             resp += response[i]['text'] + "  "
         except:
-            continue
+            pass
+        try:
+            resp += response[i]['custom']['rule'] + "  "
+        except:
+            pass
         
-    
     return resp
+    
