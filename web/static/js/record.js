@@ -39,8 +39,8 @@ var result = document.getElementById("result");
 //add events to those 2 buttons
 recordButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
-changeToAudio.addEventListener("click", toAudio);
-changeToText.addEventListener("click", toText);
+// changeToAudio.addEventListener("click", toAudio);
+// changeToText.addEventListener("click", toText);
 
 function toAudio(){
 	changeToText.style.display = "block";

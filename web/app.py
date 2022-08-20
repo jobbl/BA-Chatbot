@@ -1,5 +1,5 @@
 from urllib import response
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, redirect, url_for
 from urllib.parse import quote
 from network import synthesize, recognize, rasa_connector_rule,rasa_connector_ml, stt
 import time
@@ -48,6 +48,11 @@ def intro():
 # Whenever there is a request from the client to this url, run the following code
 @app.route('/audio', methods=['POST', 'GET'])
 def audio():
+
+    try:
+        users[str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))]
+    except:
+        return redirect(url_for('intro'))
 
     if users[str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))] == "rule":
         link = link_rule
@@ -107,6 +112,11 @@ def audio():
 @app.route('/text', methods=['POST', 'GET'])
 def text():
 
+    try:
+        users[str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))]
+    except:
+        return redirect(url_for('intro'))
+
     if users[str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))] == "rule":
         link = link_rule
     else:
@@ -165,6 +175,11 @@ def text():
 def download(variable):
 
     return send_file(wav_response,as_attachment=True, download_name='audio.wav')
+
+@app.route('/', methods=['POST', 'GET'])
+def redirect_to_intro():
+
+    return redirect(url_for('intro'))
 
 # executes when script is called -> starts the server, takes optional arguments like port number and debugging amount, see flask documentation
 if __name__ == "__main__":
