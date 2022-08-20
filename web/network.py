@@ -127,7 +127,7 @@ def rasa_connector_rule(sender,text):
         "POST",   url="http://rasa_rule:5005/webhooks/rest/webhook", headers=headers, data=payload).json()
 
     resp = ""
-
+    rule_resp = ""
     #   append all responses with "text" into one string (todo: handle images, other kind of data)
     for i in range(len(response)):
         try:
@@ -135,4 +135,5 @@ def rasa_connector_rule(sender,text):
         except:
             continue
         
+    
     return resp
