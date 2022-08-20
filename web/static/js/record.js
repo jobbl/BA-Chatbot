@@ -114,7 +114,7 @@ function startRecording() {
 			const formData = new FormData();
 			formData.append("audio", blob, "test.wav");
 			
-			fetch("/audio", {method: "POST", body:blob}).then(response => response.json()).then((response) => {
+			fetch("/", {method: "POST", body:blob}).then(response => response.json()).then((response) => {
 				
 				return response.html;
 			}).then((html) => {
