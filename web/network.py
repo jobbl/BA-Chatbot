@@ -33,11 +33,7 @@ def stt(wav_path,model_path):
         if rec.AcceptWaveform(data):
             text += json.loads(rec.Result())["text"]
         else:
-            print(rec.PartialResult())
             text += json.loads(rec.PartialResult())["partial"]
-            
-
-    print(text)
     
     return text
 
@@ -65,9 +61,6 @@ async def recognize_websocket(wav_question):
 
             await websocket.send(data)
             result = (await websocket.recv())
-            # print(result)
-            # print(type(result))
-
 
         await websocket.send('{"eof" : 1}')
         try:    
@@ -75,8 +68,6 @@ async def recognize_websocket(wav_question):
         except :
             result = json.loads(result)["partial"]
             
-        # print(result)
-        # print(type(result))
         return (result)
 
 

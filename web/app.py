@@ -10,29 +10,22 @@ from flask_talisman import Talisman
 
 wav_question = "question.wav"
 wav_response = "response.wav"
-link_ml = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/565864?lang=en"
-link_rule = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/511888?lang=en"
+link_ml = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/331853?lang=en"
+link_rule = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/752773?lang=en"
 users = []
 
 
 # initialize stt (triggers download language model for larynx/rhasspy)
-# while True:
-#     try:
-#         synthesize("test", wav_response)
-#         break
-#     except: continue
+while True:
+    try:
+        synthesize("test", wav_response)
+        break
+    except: continue
 
 # create Flask instance
 app = Flask(__name__)
 Talisman(app, content_security_policy=None)
 Session(app)
-
-# @app.before_request
-# def before_request():
-#     if request.scheme == 'http':
-#         return redirect(url_for(request.endpoint,
-#                                 _scheme='https',
-#                                 _external=True))
 
 @app.route('/intro')
 def intro():
@@ -43,12 +36,6 @@ def intro():
 
     model = random.choice(['ml', 'rule'])
     # users[str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))] = model
-
-    print(model)
-    if model == "ml":
-        link = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/331853?lang=en"
-    else:
-        link = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/752773?lang=en"
 
     resp = make_response(render_template('intro.html'))
     resp.set_cookie('model', model)
@@ -99,7 +86,7 @@ def index():
                 # write as wav, to bring in the right format for python
                 f.write(request.data)
 
-            # recognize speech with vosk
+            # recognize speech with vosk - small model
             text = stt(wav_question,"vosk-model-small-en-us-0.15")
 
         else:
@@ -115,6 +102,9 @@ def index():
 
             last_response = response
             
+            print("The user said:",text)
+            print("RASA answered:",response)
+
 
             # response = rasa_connector_rule(request.cookies.get('id'),text)
             # if response[1] not in (None, '',"None"):
