@@ -3,3 +3,4 @@ requests==2.27.1
 vosk
 websockets==10.3
 Flask-Session
+flask-talisman

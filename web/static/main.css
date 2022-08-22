@@ -75,6 +75,10 @@ display: flex;
     box-shadow:0 0 0 1px #5cb85c inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #4cae4c, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
     background-color:#5cb85c;
   }
+  .btn-help {
+    box-shadow:0 0 0 1px #f2ff39 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #d7e425, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#f2ff39;
+  }
   .btn-info {
     box-shadow:0 0 0 1px #5bc0de inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #46b8da, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
     background-color:#5bc0de;
@@ -88,7 +92,7 @@ display: flex;
     background-color:#c63702;
   }
   .btn-danger-pulsing {
-    box-shadow:0 0 0 1px #c63702 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #C24032, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    box-shadow:0 0 0 1px #c63702 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #C24032, 0 8px 0 1px rgb(255, 255, 255), 0 8px 8px 1px rgb(255, 255, 255);
     background-color:#c63702;
     animation: pulse 2s infinite;
   }

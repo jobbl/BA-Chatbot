@@ -3,20 +3,20 @@ services:
   actions:
     build: rasa/actions/.
     container_name: actions
-    ports: 
-      - 5056:5055
+    # ports: 
+    #   - 5056:5055
 
   rasa:
     build: rasa/.
     container_name: rasa
-    ports: 
-      - 5006:5005
+    # ports: 
+    #   - 5006:5005
 
   tts:
     image: rhasspy/larynx:latest
     container_name: tts
-    ports: 
-      - 5002:5002
+    # ports: 
+    #   - 5002:5002
       
   web:
     build: web/.

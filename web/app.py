@@ -6,6 +6,7 @@ import time
 import os
 import random
 from flask_session import Session
+from flask_talisman import Talisman
 
 wav_question = "question.wav"
 wav_response = "response.wav"
@@ -23,7 +24,15 @@ users = []
 
 # create Flask instance
 app = Flask(__name__)
+Talisman(app, content_security_policy=None)
 Session(app)
+
+# @app.before_request
+# def before_request():
+#     if request.scheme == 'http':
+#         return redirect(url_for(request.endpoint,
+#                                 _scheme='https',
+#                                 _external=True))
 
 @app.route('/intro')
 def intro():
@@ -37,9 +46,9 @@ def intro():
 
     print(model)
     if model == "ml":
-        link = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/565864?lang=en"
+        link = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/331853?lang=en"
     else:
-        link = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/511888?lang=en"
+        link = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/752773?lang=en"
 
     resp = make_response(render_template('intro.html'))
     resp.set_cookie('model', model)
@@ -142,9 +151,9 @@ def index():
                 # synthesize speech with rhasspy,audio will be downloaded at /audio_response, see record.js
                 synthesize(response, wav_response)
                 payload = {"html": render_template(
-                    'index.html', result=response, link = link,text = text_input)}
+                    'index.html', result=response, link = link,text = text_input, last_response=last_response)}
                 resp = make_response(payload)
-                resp.set_cookie('last_response', last_response, last_response=last_response)
+                resp.set_cookie('last_response', last_response)
                 return resp
 
     else:
@@ -170,10 +179,16 @@ def download(variable):
 
     return send_file(wav_response,as_attachment=True, download_name='audio.wav')
 
-@app.route('/', methods=['POST', 'GET'])
-def redirect_to_intro():
+@app.route('/help', methods=['POST', 'GET'])
+def help():
 
-    return redirect(url_for('intro'))
+    return render_template('help.html')
+
+@app.route('/restart', methods=['POST', 'GET'])
+def restart():
+
+    resp = make_response(redirect(url_for('intro')))
+    return resp
 
 # executes when script is called -> starts the server, takes optional arguments like port number and debugging amount, see flask documentation
 if __name__ == "__main__":

@@ -1,6 +1,12 @@
 <!-- extends from base.html -->
 {% extends 'base.html' %}
 {% block nav %}
+<button  type="button" class="btn btn-info btn-lg btn3d"  onclick="location.href='/restart';">
+  Restart
+</button>
+<button  type="button" class="btn btn-help btn-lg btn3d"  onclick="location.href='/help';">
+  Help
+</button>
 {% if text %}
   <button type="button" id="changeToAudio" class="btn btn-danger btn-lg btn3d"  onclick="location.href = '/audio';">
 Change to Audio 

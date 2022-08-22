@@ -90,7 +90,7 @@ responses:
   - text: "That's a beautiful name, I like it!"
 
   utter_iamabot:
-  - text: "I am Emotion Bot, a prototype for enabling more empathic online therapy. Keep in mind that 
+  - text: "I am a prototype for enabling more empathic online therapy. Keep in mind that 
   I do not replace the help and advice of a real human therapist! Are you ready to start?"
 
   utter_understand:
