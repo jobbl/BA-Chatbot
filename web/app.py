@@ -10,8 +10,8 @@ from flask_talisman import Talisman
 
 wav_question = "question.wav"
 wav_response = "response.wav"
-link_ml = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/331853?lang=en"
-link_rule = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/752773?lang=en"
+link_ml = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/555729?lang=en"
+link_rule = "https://bildungsportal.sachsen.de/umfragen/limesurvey/index.php/192241?lang=en"
 users = []
 
 

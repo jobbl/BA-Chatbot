@@ -45,5 +45,5 @@ policies:
   # - name: UnexpecTEDIntentPolicy
   #   epochs: 10
   - name: TEDPolicy
-    epochs: 10
+    epochs: 200
     constrain_similarities: true
