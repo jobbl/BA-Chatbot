@@ -25,8 +25,20 @@ forms:
   future_form:
     required_slots:
       - journal_future
+  name_form:
+    required_slots:
+      - name
 
 slots:
+
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+         - active_loop: name_form
+           requested_slot: name
 
   journal_past:
     type: text

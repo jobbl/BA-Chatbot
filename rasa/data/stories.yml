@@ -5,8 +5,11 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
-  - action: utter_ask_name
-  - intent: name_answer
+  - action: name_form
+  - active_loop: name_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
   - action: utter_name_reaction
   - checkpoint: iamabot
 
