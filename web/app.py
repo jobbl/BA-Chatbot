@@ -16,11 +16,11 @@ users = []
 
 
 # initialize stt (triggers download language model for larynx/rhasspy)
-while True:
-    try:
-        synthesize("test", wav_response)
-        break
-    except: continue
+# while True:
+#     try:
+#         synthesize("test", wav_response)
+#         break
+#     except: continue
 
 # create Flask instance
 app = Flask(__name__)
@@ -58,7 +58,6 @@ def intro():
 @app.route('/', methods=['POST', 'GET'])
 def index():
 
-    print(request.cookies.get('model'),request.cookies.get('mode'),request.cookies.get('id'),request.cookies.get('last_response'))
     if request.cookies.get('last_response'):
         last_response = request.cookies.get('last_response')
     else:
@@ -77,8 +76,11 @@ def index():
     else:
         text_input = None
 
+    print(request.cookies.get('model'),request.cookies.get('mode'),request.cookies.get('id'),request.cookies.get('last_response'))
+
     if request.method == "POST":
-    
+        print("here")
+
         response = ""
         # if client recorded audio, there will be data
         if request.data:
@@ -88,11 +90,15 @@ def index():
 
             # recognize speech with vosk - small model
             text = stt(wav_question,"vosk-model-small-en-us-0.15")
+            print("here1")
 
         else:
+            print("here2")
+
             #  extract form data if there was any in the request
             text = str(request.form.get("question"))
 
+        print("The user said:",text)
         if text not in (None, '',"None"):
 
             if request.cookies.get('model') == "rule":
