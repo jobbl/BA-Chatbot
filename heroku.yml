@@ -1,27 +1,27 @@
-services:
+build:
+  docker:
+    actions:
+      build: rasa/actions/.
+      container_name: actions
+      # ports: 
+      #   - 5056:5055
 
-  actions:
-    build: rasa/actions/.
-    container_name: actions
-    # ports: 
-    #   - 5056:5055
+    rasa:
+      build: rasa/.
+      container_name: rasa
+      # ports: 
+      #   - 5006:5005
 
-  rasa:
-    build: rasa/.
-    container_name: rasa
-    # ports: 
-    #   - 5006:5005
-
-  tts:
-    image: rhasspy/larynx:latest
-    container_name: tts
-    # ports: 
-    #   - 5002:5002
-      
-  web:
-    build: web/.
-    container_name: web
-    ports: 
-      - 5000:5000
-    environment:
-      - PYTHONUNBUFFERED=1
+    tts:
+      image: rhasspy/larynx:latest
+      container_name: tts
+      # ports: 
+      #   - 5002:5002
+        
+    web:
+      build: web/.
+      container_name: web
+      ports: 
+        - 80:5000
+      environment:
+        - PYTHONUNBUFFERED=1
