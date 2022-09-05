@@ -1,10 +1,8 @@
 build:
   docker:
     actions: rasa/actions/.
-      container_name: actions
 
     rasa: rasa/.
-      container_name: rasa
 
     tts: rhasspy/larynx:latest
         
