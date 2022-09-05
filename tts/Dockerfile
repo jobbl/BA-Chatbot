@@ -1,0 +1,1 @@
+FROM rhasspy/larynx:latest

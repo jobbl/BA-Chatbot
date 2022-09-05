@@ -4,7 +4,7 @@ build:
 
     rasa: rasa/Dockerfile
 
-    tts: rhasspy/larynx:latest
+    tts: tts/Dockerfile
         
     web: web/Dockerfile
 
