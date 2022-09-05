@@ -4,3 +4,4 @@ vosk
 websockets==10.3
 Flask-Session
 flask-talisman
+pyopenssl

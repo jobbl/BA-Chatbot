@@ -7,6 +7,7 @@ import os
 import random
 from flask_session import Session
 from flask_talisman import Talisman
+import ssl
 
 wav_question = "question.wav"
 wav_response = "response.wav"
@@ -16,16 +17,16 @@ users = []
 
 
 # initialize stt (triggers download language model for larynx/rhasspy)
-# while True:
-#     try:
-#         synthesize("test", wav_response)
-#         break
-#     except: continue
+while True:
+    try:
+        synthesize("test", wav_response)
+        break
+    except: continue
 
 # create Flask instance
 app = Flask(__name__)
 Talisman(app, content_security_policy=None)
-Session(app)
+# Session(app)
 
 @app.route('/intro')
 def intro():
@@ -188,5 +189,11 @@ def restart():
 
 # executes when script is called -> starts the server, takes optional arguments like port number and debugging amount, see flask documentation
 if __name__ == "__main__":
-    context=('your-cert.crt','myserver.key')
-    app.run(host= '0.0.0.0',ssl_context=context,port=5000,debug=True)
+    # context=('cert.pem','key.pem')
+    # context = ssl.SSLContext()
+    # context.load_cert_chain('emotionbot_ddns_net.pem-chain', 'myserver.key')
+    # context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2) # use TLS to avoid POODLE
+    # context.load_cert_chain('emotionbot_ddns_net.pem', 'myserver.key')
+    # app.run('0.0.0.0',ssl_context=ctx,debug=True) 
+    # context = ('emotionbot_ddns_net.pem-chain', 'myserver.key')#certificate and key files
+    app.run(host= '0.0.0.0',debug=True)
