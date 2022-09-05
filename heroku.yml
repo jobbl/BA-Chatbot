@@ -1,10 +1,10 @@
 build:
   docker:
-    actions: rasa/actions/.
+    actions: rasa/actions/Dockerfile
 
-    rasa: rasa/.
+    rasa: rasa/Dockerfile
 
     tts: rhasspy/larynx:latest
         
-    web: web/.
+    web: web/Dockerfile
 
